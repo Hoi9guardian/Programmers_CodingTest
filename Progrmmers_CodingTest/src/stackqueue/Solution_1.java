@@ -17,7 +17,7 @@ public class Solution_1 {
 		if(progresses.length == 0) return new int [0];
 		
 		
-		
+		fdsfasfasdfasdf
 		
 		
 		return answer;
