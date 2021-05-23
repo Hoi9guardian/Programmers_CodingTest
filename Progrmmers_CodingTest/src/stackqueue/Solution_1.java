@@ -2,7 +2,7 @@ package stackqueue;
 
 public class Solution_1 {
 	public static void main(String [] args ) {
-/*		ÀÛ¾÷ÀÇ °¹¼ö : progresses ÀÛ¾÷ ¼Óµµ : speeds
+/*		 : progresses  : speeds
  * 		
  * 
  * 
@@ -17,7 +17,7 @@ public class Solution_1 {
 		if(progresses.length == 0) return new int [0];
 		
 		
-		
+		// ê¹ƒí—ˆë¸Œ í…ŒìŠ¤íŠ¸ ì¤‘ ....  6_ gitignore _ ê¹ƒí—ˆë¸Œ ë°˜ì˜ ì—¬ë¶€ í™•ì¸ 
 		
 		
 		return answer;
