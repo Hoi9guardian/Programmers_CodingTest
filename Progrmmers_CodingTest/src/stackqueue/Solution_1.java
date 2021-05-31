@@ -14,32 +14,44 @@ public class Solution_1 {
  * 
  * 
  * */
+		int[] progresses = {93,30,55};
+		int[] speeds = {1,30,5};
+		
+		prn(solution(progresses,speeds));
+		
 		
 	}
 	
 	public static List solution(int[] progresses, int[] speeds) {
 		
-		Queue<Integer> q = new ConcurrentLinkedQueue<Integer>();
-		
+		Queue<Integer> pQ = new ConcurrentLinkedQueue<Integer>();
+		// 
 		for(int i=0; i<progresses.length; i++) {
-			q.add(
-					
-				(100 -progresses[i]%speeds[i] == 0 
-				?(100 - progresses[i]) 
-				:(100 - progresses[i])/speeds[i]+1)
+			pQ.add(
+				// 삼항연산자	
+				(100 - progresses[i] % speeds[i] == 0 
+				?	(100 - progresses[i]) 
+				:	(100 - progresses[i])/speeds[i]+1)
 				
-				);			
+			);			
 		}
+		
 		// 
 		
 		List<Integer> result = new ArrayList<Integer>();
-		int standard = q.poll();
-		int cnt = 1;
 		
-		while(!q.isEmpty()) {
-			int num = q.poll();
+		
+		
+		while(!pQ.isEmpty()) {
+			int period = pQ.poll();
+			int cnt = 1;
 			
-			
+			while(!pQ.isEmpty() && period >= pQ.peek()) {
+				cnt++;
+				pQ.poll();
+			}
+			result.add(cnt);
+					
 		}
 		
 		
@@ -49,6 +61,19 @@ public class Solution_1 {
 	}
 	
 	
-	
+	public static void prn(List<Integer> result) {
+			System.out.print("[ ");
+		for(int i=0; i<result.size() ;i++) {
+			
+			System.out.print(result.get(i)+", ");
+			
+			if(i==result.size()-1) {
+				System.out.print(result.get(i)+" ]");
+			}
+			
+		}
+		
+		
+	}
 	
 }
