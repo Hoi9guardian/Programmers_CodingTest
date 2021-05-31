@@ -30,7 +30,7 @@ public class Solution_1 {
 			pQ.add(
 				// 삼항연산자	
 				(100 - progresses[i] % speeds[i] == 0 
-				?	(100 - progresses[i]) 
+				?	(100 - progresses[i])/speeds[i] 
 				:	(100 - progresses[i])/speeds[i]+1)
 				
 			);			
