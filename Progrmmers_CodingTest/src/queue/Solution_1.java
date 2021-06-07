@@ -7,8 +7,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Solution_1 {
 	public static void main(String [] args) {
-		
-		
+		int [] processes = {93,30,55};
+		int [] speeds = {1,30,5};
+		prn(solution(processes,speeds));
 		
 	}
 	
@@ -22,20 +23,35 @@ public class Solution_1 {
 			
 		}
 		
-		List<Integer> countlist = new ArrayList<Integer>();				
+		List<Integer> countlist = new ArrayList<Integer>();
+		
+		int q_std = periodsQueue.poll();
+		int cnt = 1;
 		
 		while(!periodsQueue.isEmpty()) {
-			
-			int cnt = 1;
-			int q_poll = periodsQueue.poll(); 
-			
-			while(!periodsQueue.isEmpty() && q_poll >= periodsQueue.peek()) {
-				
-				q_poll = periodsQueue.poll();
+					 
+			int q_next = periodsQueue.poll();
+								
+			if(q_std >= q_next) {
 				cnt++;
+			}else {
+				countlist.add(cnt);
+				cnt=1;
+				q_std = q_next;
 			}
-			countlist.add(cnt);
+			
+			/*
+			 * 		
+			 * 
+			 * 
+			 * 
+			 * 
+			 */			
+			
 		}
+		
+		countlist.add(cnt);
+				
 		
 		int [] result = new int[countlist.size()] ;
 		
@@ -43,6 +59,13 @@ public class Solution_1 {
 			result[i] = countlist.get(i);
 		}
 		return result;
+	}
+	
+	public static void prn(int [] result) {
+		
+		for(int i =0 ; i< result.length; i++) {
+			System.out.print(result[i]);
+		}
 	}
 	
 	
