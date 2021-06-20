@@ -1,6 +1,9 @@
 package stackqueue;
 
 
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 /*
     [문제 설명]
 	일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.
@@ -28,32 +31,79 @@ package stackqueue;
 public class Solution_2 {
 	public static void main(String [] args ) {
 		
+		
+		
 		// 1 
-		int  [] priorities = {};
-		int location = 0;
+		int  [] priorities = {2,1,3,2};
+		int location = 2;
 		System.out.println("1 // "+solution(priorities,location));
 		// 2
-		int [] priorities2 = {};
+		int [] priorities2 = {1,1,9,1,1,1};
 		location = 0;
 		System.out.println("2 // "+solution(priorities2,location));
 	}
 	
 	public static int solution(int[] priorities, int location) {
+		int answer = 0;		 
+		Queue<Printer> q = new ConcurrentLinkedQueue<>();
+//		List<Integer> q_list = new ArrayList<Integer>(); 
+		 
+		for(int i=0; i<priorities.length; i++) {
+// 안덱스,중요도 -> 객체 만들어서 해당 객체를 이용한 풀이			 
+//			q.add(priorities[i]);
+			q.offer(new Printer(i,priorities[i]));
+		 }
 		
 		
 		
+		while(!q.isEmpty()) {
+			boolean flag = false;
+			int com = q.peek().prior;
+			
+			for(Printer p : q) {
+				if(com < p.prior) {
+					flag = true;
+				}
+			}
+			
+			if(flag) {
+				q.offer(q.poll());
+			}else { // 뒤에 우선순위가 큰 수가 없을 때,
+				if(q.poll().location == location) {
+					answer = priorities.length - q.size() ;
+				}
+			}
+			
+			
+		}
+// [정렬 방법 1. 일반적인 Arraylist로 풀이해보기]
+		
+		 	
 		
 		
 		
-		
-		
-		
-		int answer = 0;
 		
 		return answer;
 	}
+// 일반적인 ConcurrentLinkedQueue 	[1. 일반큐를 사용한 풀이]	
+// priorityQueue 사용한 풀이 법이 간단함 [ 2. Priority 사용한 풀이 ]
 	
-	
-	
-	
+	 
 }
+
+ class Printer {
+	 int location;
+	 int prior;
+	 
+	 public Printer(int location, int prior) {
+		 this.location = location;
+		 this.prior = prior;
+	 }
+ }
+
+
+
+
+
+
+
