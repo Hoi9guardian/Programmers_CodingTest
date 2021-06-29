@@ -1,4 +1,7 @@
 package hash;
+
+import java.util.HashMap;
+
 /*
 스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.
 
@@ -38,14 +41,33 @@ face에 해당하는 의상이 crow_mask, blue_sunglasses, smoky_makeup이므로
 1. crow_mask
 2. blue_sunglasses
 3. smoky_makeup 
+
  */
 public class hash_3 {
 	public static void main(String [] args) {
-		
-	}
+		String [][] clothes = {{"yellowhat", "headgear"}, {"bluesunglasses", "eyewear"}, {"green_turban", "headgear"}};
+		System.out.println(solution(clothes));	}
 	
 	public static int solution(String[][] clothes) {
 		int answer = 0;
+		
+		HashMap<String,Integer> hm = new HashMap<String,Integer>();			
+		
+		for(int i=0;i<clothes.length;i++) {			
+				hm.put(clothes[i][1],hm.getOrDefault(clothes[i][1], 0) +1);			
+		}
+		
+		int value_2 = 1;
+		for(String i : hm.keySet() ) {		
+			
+			int value_1 = hm.get(i)+1;
+			
+			System.out.println(value_1);
+			value_2 *= value_1;		
+		}
+		//조건 중 무조건 한 개 이상은 입어야 한든 조건 이 있어, 모든 경우의 수에서 다 안 입는 경우 제거
+		answer= value_2-1;
+				
 		return answer;
 	}
 }
